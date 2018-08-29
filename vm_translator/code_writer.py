@@ -23,7 +23,7 @@ class CodeWriter:
 
     def __enter__(self):
         self.fd = open(self.file, 'w')
-        self.write_bootstrap()
+        # self.write_bootstrap()
         return self
 
     def __exit__(self, exc_type, exc_val, exc_tb):

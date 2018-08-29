@@ -1,46 +1,45 @@
-from vm_translator.utils.basic import STACK_ADDR
-from .basic import POP_STACK_D, POP_STACK_ADDR_A, INC_STACK_ADDR
+from .basic import (
+    STACK_ADDR,
+    POP_STACK_D,
+    POP_STACK_ADDR_A,
+    INC_STACK_ADDR,
+    STACK_OVERWRITE
+)
 
 
 class ArithmeticCode:
     ADD = "\n".join([
         POP_STACK_D,
-        POP_STACK_ADDR_A,
+        STACK_OVERWRITE,  # simulate pop from stack then pus result
         "M=M+D",
-        INC_STACK_ADDR
     ])
 
     SUB = "\n".join([  # a - b = m
         POP_STACK_D,  # b
-        POP_STACK_ADDR_A,  # a
+        STACK_OVERWRITE,  # a
         "M=M-D",  # a - b = m
-        INC_STACK_ADDR
     ])
 
     NEG = "\n".join([
-        POP_STACK_ADDR_A,
+        STACK_OVERWRITE,
         "M=-M",
-        INC_STACK_ADDR
     ])
 
     NOT = "\n".join([
-        POP_STACK_ADDR_A,
+        STACK_OVERWRITE,
         "M=!M",
-        INC_STACK_ADDR
     ])
 
     AND = "\n".join([
         POP_STACK_D,
-        POP_STACK_ADDR_A,
+        STACK_OVERWRITE,
         "M=M&D",
-        INC_STACK_ADDR
     ])
 
     OR = "\n".join([
         POP_STACK_D,
-        POP_STACK_ADDR_A,
+        STACK_OVERWRITE,
         "M=M|D",
-        INC_STACK_ADDR
     ])
 
     IF_TRUE_ADDR = "@IFTRUE{}"
