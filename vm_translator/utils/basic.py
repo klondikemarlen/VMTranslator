@@ -3,14 +3,13 @@ INC_STACK_ADDR = "\n".join([
     "M=M+1"
 ])
 
-POP_STACK_ADDR = "\n".join([
+POP_STACK_ADDR_A = "\n".join([
     "@SP",
-    "M=M-1",
-    "A=M"
+    "AM=M-1",
 ])
 
 POP_STACK_D = "\n".join([
-    POP_STACK_ADDR,
+    POP_STACK_ADDR_A,
     "D=M"
 ])
 
@@ -19,9 +18,14 @@ STACK_ADDR = "\n".join([
     "A=M"
 ])
 
+STACK_ADDR_A_INC = '\n'.join([
+    "@SP",
+    "M=M+1",  # increment stack address
+    "A=M-1",  # set A original stack address
+])
+
 PUSH_D_STACK = '\n'.join([
-    INC_STACK_ADDR,  # move stack forward by 1.
-    "A=M-1",  # get address of previous stack.
+    STACK_ADDR_A_INC,
     "M=D",  # set previous address to D.
 ])
 

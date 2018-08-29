@@ -1,49 +1,44 @@
 from vm_translator.utils.basic import STACK_ADDR
-from .basic import POP_STACK_D, POP_STACK_ADDR, INC_STACK_ADDR
+from .basic import POP_STACK_D, POP_STACK_ADDR_A, INC_STACK_ADDR
 
 
 class ArithmeticCode:
-    DEC_STACK_ADDR = "\n".join([
-        "@SP",
-        "M=M-1"
-    ])
-
     ADD = "\n".join([
         POP_STACK_D,
-        POP_STACK_ADDR,
+        POP_STACK_ADDR_A,
         "M=M+D",
         INC_STACK_ADDR
     ])
 
     SUB = "\n".join([  # a - b = m
         POP_STACK_D,  # b
-        POP_STACK_ADDR,  # a
+        POP_STACK_ADDR_A,  # a
         "M=M-D",  # a - b = m
         INC_STACK_ADDR
     ])
 
     NEG = "\n".join([
-        POP_STACK_ADDR,
+        POP_STACK_ADDR_A,
         "M=-M",
         INC_STACK_ADDR
     ])
 
     NOT = "\n".join([
-        POP_STACK_ADDR,
+        POP_STACK_ADDR_A,
         "M=!M",
         INC_STACK_ADDR
     ])
 
     AND = "\n".join([
         POP_STACK_D,
-        POP_STACK_ADDR,
+        POP_STACK_ADDR_A,
         "M=M&D",
         INC_STACK_ADDR
     ])
 
     OR = "\n".join([
         POP_STACK_D,
-        POP_STACK_ADDR,
+        POP_STACK_ADDR_A,
         "M=M|D",
         INC_STACK_ADDR
     ])
@@ -62,7 +57,7 @@ class ArithmeticCode:
 
     EQ = "\n".join([  # a == b
         POP_STACK_D,  # b
-        POP_STACK_ADDR,  # a
+        POP_STACK_ADDR_A,  # a
         "D=M-D",  # a - b = d, d used for comparison, subtraction
         IF_TRUE_ADDR,
         "D;JEQ",  # D used for comparison
@@ -72,7 +67,7 @@ class ArithmeticCode:
 
     GT = "\n".join([  # if a > b, m = -1 otherwise m = 0
         POP_STACK_D,  # b
-        POP_STACK_ADDR,  # a
+        POP_STACK_ADDR_A,  # a
         "D=M-D",  # a - b = d, d used for comparison
         IF_TRUE_ADDR,
         "D;JGT",  # a - b > 0 if a > b
@@ -82,7 +77,7 @@ class ArithmeticCode:
 
     LT = "\n".join([
         POP_STACK_D,
-        POP_STACK_ADDR,
+        POP_STACK_ADDR_A,
         "D=M-D",
         IF_TRUE_ADDR,
         "D;JLT",

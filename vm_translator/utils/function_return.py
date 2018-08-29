@@ -1,12 +1,10 @@
-from .basic import INC_STACK_ADDR, POP_STACK_D
-from vm_translator.utils.basic import STACK_ADDR
+from .basic import STACK_ADDR_A_INC, POP_STACK_D
 
 
 class FunctionReturn:
     PUSH_0 = '\n'.join([
-        STACK_ADDR,
+        STACK_ADDR_A_INC,
         "M=0",
-        INC_STACK_ADDR
     ])
 
     @staticmethod
