@@ -20,9 +20,9 @@ STACK_ADDR = "\n".join([
 ])
 
 PUSH_D_STACK = '\n'.join([
-    STACK_ADDR,
-    "M=D",
-    INC_STACK_ADDR
+    INC_STACK_ADDR,  # move stack forward by 1.
+    "A=M-1",  # get address of previous stack.
+    "M=D",  # set previous address to D.
 ])
 
 SET_D = "\n".join([
